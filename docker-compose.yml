@@ -11,14 +11,19 @@ services:
     - "9091:9091"
     # - "8888:8888" # proxy support
   volumes:
-    - /your/storage/path/:/data # where transmission will store the data
-    - /your/config/path/:/config # where transmission-home is stored
+    - /media/sdb1/:/data # where transmission will store the data
+    - /path/to/data:/config # where transmission-home is stored
+    - /media/sdb1/:/downloads
   environment:
-    - OPENVPN_PROVIDER=PIA
-    - OPENVPN_USERNAME=username
-    - OPENVPN_PASSWORD=password
+    - OPENVPN_PROVIDER=fastVPN
+    - OPENVPN_USERNAME=ncpxzatrox@namecheap
+    - OPENVPN_PASSWORD=r7aJe5PBAQ
     - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
-    - LOCAL_NETWORK=192.168.0.0/24
+    - LOCAL_NETWORK=10.0.0.0/24
+    - TRANSMISSION_RPC_USERNAME=Trox
+    - TRANSMISSION_RPC_PASSWORD=Zxcvbnm1983
+    - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
+    - TRANSMISSION_HOME=/config
  # proxy:
  #  image: haugene/transmission-openvpn-proxy
  #  links:
