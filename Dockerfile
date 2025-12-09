@@ -41,7 +41,7 @@ RUN set -ex; \
       libpsl-dev \
       libssl-dev
 
-FROM haugene/transmission-builder:4.0.4 as TransmissionBuilder
+FROM haugene/transmission-builder:4.0.6 as TransmissionBuilder
 
 FROM base
 
@@ -51,7 +51,7 @@ VOLUME /config
 COPY --from=TransmissionUIs /opt/transmission-ui /opt/transmission-ui
 COPY --from=TransmissionBuilder /var/tmp/*.deb /var/tmp/
 
-ARG TBT_VERSION=4.0.4
+ARG TBT_VERSION=4.0.6
 ARG DEBIAN_FRONTEND=noninteractive
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

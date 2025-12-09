@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
  transmission:
   image: haugene/transmission-openvpn
@@ -15,7 +15,7 @@ services:
     - /path/to/data:/config # where transmission-home is stored
     - /media/sdb1/:/downloads
   environment:
-    - OPENVPN_PROVIDER=fastVPN
+    - OPENVPN_PROVIDER=fastvpn
     - OPENVPN_USERNAME=ncpxzatrox@namecheap
     - OPENVPN_PASSWORD=r7aJe5PBAQ
     - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
@@ -24,6 +24,7 @@ services:
     - TRANSMISSION_RPC_PASSWORD=Zxcvbnm1983
     - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
     - TRANSMISSION_HOME=/config
+    - GITHUB_CONFIG_SOURCE_REPO=Xzatrox/vpn-configs-contrib
  # proxy:
  #  image: haugene/transmission-openvpn-proxy
  #  links:
