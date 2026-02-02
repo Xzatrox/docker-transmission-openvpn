@@ -22,12 +22,17 @@ then
 fi
 
 # Check DNS resolution works
-nslookup $HOST > /dev/null
+nslookup -q=a $HOST > /dev/null
 STATUS=$?
 if [[ ${STATUS} -ne 0 ]]
 then
-    echo "DNS resolution failed"
-    exit 1
+    nslookup -q=aaaa $HOST > /dev/null
+    STATUS=$?
+    if [[ ${STATUS} -ne 0 ]]
+    then
+        echo "DNS resolution failed"
+        exit 1
+    fi
 fi
 
 ping -c 2 -w 10 $HOST # Get at least 2 responses and timeout after 10 seconds
@@ -59,7 +64,7 @@ if [[ ${WEBPROXY_ENABLED} =~ [yY][eE]?[Ss]?|[tT][Rr][Uu][eE] ]]; then
   if [[ ${PROXY} -eq 0 ]]; then
     echo "Privoxy warning: process was stopped, restarting."
   fi
-    proxy_ip=$(grep -oP "(?<=^listen-address )[0-9\.]+" /etc/privoxy/config)
+    proxy_ip=$(grep -i "^listen-address" /etc/privoxy/config | awk -F ' ' '{print $2}' | awk -F ':' '{print $1}')
     cont_ip=$(ip -j a show dev eth0 | jq -r .[].addr_info[].local)
     if [[ ${proxy_ip} != ${cont_ip} ]]; then
       echo "Privoxy error: container ip (${cont_ip} has changed: privoxy listening to ${proxy_ip}, restarting privoxy."
