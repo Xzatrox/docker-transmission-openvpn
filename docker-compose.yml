@@ -11,19 +11,23 @@ services:
     - "9091:9091"
     # - "8888:8888" # proxy support
   volumes:
-    - /media/sdb1/:/data # where transmission will store the data
-    - /path/to/data:/config # where transmission-home is stored
-    - /media/sdb1/:/downloads
+    - /mnt/shared:/data
+    - /mnt/shared:/config
+    - /mnt/shared:/downloads
+    - /mnt/shared/audiobooks:/audiobooks
+    - /mnt/shared-20tb:/mnt/shared-20tb
   environment:
     - OPENVPN_PROVIDER=fastvpn
     - OPENVPN_USERNAME=ncpxzatrox@namecheap
     - OPENVPN_PASSWORD=r7aJe5PBAQ
     - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
-    - LOCAL_NETWORK=10.0.0.0/24
+    - LOCAL_NETWORK=10.0.0.0/16
     - TRANSMISSION_RPC_USERNAME=Trox
     - TRANSMISSION_RPC_PASSWORD=Zxcvbnm1983
     - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
-    - TRANSMISSION_HOME=/config
+    - TRANSMISSION_HOME=/config/transmission-home
+    - TRANSMISSION_DOWNLOAD_DIR=/mnt/shared-20tb/downloads
+    - TRANSMISSION_INCOMPLETE_DIR=/mnt/shared-20tb/incomplete
     - GITHUB_CONFIG_SOURCE_REPO=Xzatrox/vpn-configs-contrib
  # proxy:
  #  image: haugene/transmission-openvpn-proxy
