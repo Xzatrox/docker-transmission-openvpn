@@ -19,7 +19,7 @@ services:
   environment:
     - OPENVPN_PROVIDER=fastvpn
     - OPENVPN_USERNAME=ncpxzatrox@namecheap
-    - OPENVPN_PASSWORD=r7aJe5PBAQ
+    - OPENVPN_PASSWORD=VqyttS03Uq
     - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
     - LOCAL_NETWORK=10.0.0.0/16
     - TRANSMISSION_RPC_USERNAME=Trox
